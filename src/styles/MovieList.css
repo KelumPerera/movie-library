@@ -1,0 +1,16 @@
+.movie-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .movie-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .movie-card {
+    /* Existing styles for movie cards */
+    flex: 1 0 300px; /* Set a fixed width for each card */
+  }

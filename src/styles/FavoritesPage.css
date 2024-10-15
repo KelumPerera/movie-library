@@ -1,0 +1,16 @@
+.favorites-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .favorites-page h2 {
+    margin-bottom: 20px;
+  }
+  
+  .movie-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }

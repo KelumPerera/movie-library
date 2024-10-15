@@ -1,0 +1,22 @@
+.movie-details {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .movie-details img {
+    width: 350px;
+    height: 450px;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+  
+  .movie-details h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .movie-details p {
+    font-size: 16px;
+    line-height: 1.5; /* Adjust line spacing for readability */
+  }
