@@ -6,7 +6,8 @@
 
 import axios from 'axios';
 
-const API_KEY = 'f81ca7809df35510f37b6c2c8ec45578';
+
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 const MovieService = {
   getMovies: async (searchQuery, selectedGenre) => {

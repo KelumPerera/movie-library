@@ -9,23 +9,22 @@ import React, { createContext, useState } from 'react';
 const FavoritesContext = createContext();
 
 const FavoritesProvider = ({ children }) => {
-  const [favorites,   
- setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   const addToFavorites = (movie) => {
-    setFavorites([...favorites, movie]);
+    if (!favorites.some((favMovie) => favMovie.id === movie.id)) {
+      setFavorites([...favorites, movie]);
+    }
   };
 
-  const removeFromFavorites   
- = (movieId) => {
+  const removeFromFavorites = (movieId) => {
     setFavorites(favorites.filter((movie) => movie.id !== movieId));
   };
 
   return (
     <FavoritesContext.Provider value={{ favorites, addToFavorites, removeFromFavorites }}>
       {children}
-    </FavoritesContext.Provider>   
-
+    </FavoritesContext.Provider>
   );
 };
 

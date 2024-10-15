@@ -6,11 +6,13 @@
 // Renders the filtered list of movies using the MovieCard component.
 // Renders the SearchBar component for user input.
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import MovieCard from './MovieCard';
 import SearchBar from './SearchBar';
 import MovieService from '../services/MovieService';
+import { FavoritesContext } from '../context/FavoritesContext';
+import { Link } from 'react-router-dom';
 import '../styles/MovieList.css';
 
 const MovieList = () => {
@@ -18,7 +20,9 @@ const MovieList = () => {
   const [movies, setMovies] = useState([]); // This state variable stores an array of movie objects fetched from the API or loaded from local data.
   const [searchQuery, setSearchQuery] = useState(''); //  This state variable stores the current search query entered by the user.
   const [selectedGenre, setSelectedGenre] = useState('');    // This state variable stores the ID of the selected genre, or an empty string if no genre is selected.
-
+  const { favorites, addToFavorites, removeFromFavorites } = useContext(FavoritesContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   // Use `useSearchParams` hook to access and update URL parameters
   const [searchParams, setSearchParams] = useSearchParams();
@@ -30,8 +34,9 @@ const MovieList = () => {
     const fetchMovies = async () => {
       try {
         // Call the `getMovies` function from `MovieService`
-        const response = await MovieService.getMovies(searchQuery, selectedGenre);
-        setMovies(response.data.results);
+        const response = await MovieService.getMovies(searchQuery, selectedGenre, currentPage);
+        setMovies(prevMovies => [...prevMovies, ...response.data.results]);
+        setTotalPages(response.data.total_pages);
       } catch (error) {
         console.error(error);
       }
@@ -39,7 +44,7 @@ const MovieList = () => {
 
     fetchMovies();
   }, 
-  [searchQuery, selectedGenre]); //dependency array - side effect (fetchMovies function) re-run whenever either the searchQuery or selectedGenre state variables change
+  [searchQuery, selectedGenre, currentPage]); //dependency array - side effect (fetchMovies function) re-run whenever either the searchQuery or selectedGenre state variables change
 
   // Use `useMemo` to optimize filtering logic
   const filteredMovies = useMemo(() => {
@@ -51,6 +56,9 @@ const MovieList = () => {
       (!selectedGenre || movie.genre_ids.includes(parseInt(selectedGenre)))) // Ensures selectedGenre is converted to an integer before comparison
     );
   }, [movies, searchQuery, selectedGenre]);
+  const isFavorite = (movie) => {
+    return favorites.some((favMovie) => favMovie.id === movie.id);
+  };
 
   return (
     <div className="movie-list">
@@ -66,9 +74,14 @@ const MovieList = () => {
       <div className="movie-cards">
         {/* Render the filtered list of movies using `MovieCard` components. It displays a list of movie cards that dynamically reflects the search and filtering criteria applied by the user. */}
         {filteredMovies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          
+          <MovieCard key={movie.id} movie={movie} isFavorite={isFavorite(movie)} addToFavorites={addToFavorites} removeFromFavorites={removeFromFavorites}/>
+          
         ))}
       </div>
+      {currentPage < totalPages && (
+        <button onClick={() => setCurrentPage(currentPage + 1)}>Load More</button>
+      )}
     </div>
   );
 };
