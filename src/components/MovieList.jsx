@@ -7,6 +7,7 @@
 // Renders the SearchBar component for user input.
 
 import React, { useState, useEffect, useMemo, useContext } from 'react';
+import { lazy, Suspense } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import MovieCard from './MovieCard';
 import SearchBar from './SearchBar';
@@ -72,12 +73,14 @@ const MovieList = () => {
         setSelectedGenre={setSelectedGenre}
       />
       <div className="movie-cards">
-        {/* Render the filtered list of movies using `MovieCard` components. It displays a list of movie cards that dynamically reflects the search and filtering criteria applied by the user. */}
-        {filteredMovies.map((movie) => (
-          
-          <MovieCard key={movie.id} movie={movie} isFavorite={isFavorite(movie)} addToFavorites={addToFavorites} removeFromFavorites={removeFromFavorites}/>
-          
-        ))}
+        <Suspense fallback={<div>Loading...</div>}>
+          {/* Render the filtered list of movies using `MovieCard` components. It displays a list of movie cards that dynamically reflects the search and filtering criteria applied by the user. */}
+          {filteredMovies.map((movie) => (
+            
+            <MovieCard key={movie.id} movie={movie} isFavorite={isFavorite(movie)} addToFavorites={addToFavorites} removeFromFavorites={removeFromFavorites}/>
+            
+          ))}
+        </Suspense>
       </div>
       {currentPage < totalPages && (
         <button onClick={() => setCurrentPage(currentPage + 1)}>Load More</button>
