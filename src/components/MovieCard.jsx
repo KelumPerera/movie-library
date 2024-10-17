@@ -5,12 +5,12 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FavoritesContext } from '../context/FavoritesContext';
 import '../styles/MovieCard.css';
 
 // Defines a functional component named MovieCard that takes a movie object as a prop
+// Renders a single movie card with its title, poster, and overview
 const MovieCard = ({ movie, isFavorite, addToFavorites, removeFromFavorites }) => {
-  // Renders a single movie card with its title, poster, and overview
+  
   return (
     <div className="movie-card">
       <Link to={`/movie/${movie.id}`}>

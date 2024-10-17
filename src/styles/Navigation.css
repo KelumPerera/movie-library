@@ -1,23 +1,27 @@
+
+/* Styles the navigation bar */
 .navigation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 3px;
-    background-color: #f0f0f0;
-  }
-  
-  .navigation a {
-    text-decoration: none;
-    color: #333;
-    padding: 10px;
-    font-weight: bold;
-  }
-  
-  .navigation a:hover {
-    text-decoration: underline;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px;
+  background-color: #f0f0f0;
+}
+
+/* Styles navigation links */
+.navigation a {
+  text-decoration: none;
+  color: #333;
+  padding: 10px;
+  font-weight: bold;
+}
+
+/* Styles navigation links on hover */
+.navigation a:hover {
+  /*text-decoration: underline; */
+}

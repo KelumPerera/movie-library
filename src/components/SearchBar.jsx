@@ -8,7 +8,7 @@ import React from 'react';
 import '../styles/SearchBar.css';
 
 const SearchBar = ({ searchQuery, setSearchQuery, selectedGenre, setSelectedGenre }) => {
-  // Renders a search bar with an input field for searching movies and a dropdown for selecting genres
+  // Renders a search bar for movies with search input and genre selection
   return (
     <div className="search-bar">
       <input

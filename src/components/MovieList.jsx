@@ -8,7 +8,7 @@
 
 import React, { useState, useEffect, useMemo, useContext } from 'react';
 import { lazy, Suspense } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import MovieCard from './MovieCard';
 import SearchBar from './SearchBar';
 import MovieService from '../services/MovieService';
@@ -19,11 +19,11 @@ import '../styles/MovieList.css';
 const MovieList = () => {
   // State variables to store the list of movies, search query, and selected genre
   const [movies, setMovies] = useState([]); // This state variable stores an array of movie objects fetched from the API or loaded from local data.
-  const [searchQuery, setSearchQuery] = useState(''); //  This state variable stores the current search query entered by the user.
-  const [selectedGenre, setSelectedGenre] = useState('');    // This state variable stores the ID of the selected genre, or an empty string if no genre is selected.
+  const [searchQuery, setSearchQuery] = useState(''); //  current search query entered by the user.
+  const [selectedGenre, setSelectedGenre] = useState('');    //  Selected genre ID, or an empty string if no genre is selected.
   const { favorites, addToFavorites, removeFromFavorites } = useContext(FavoritesContext);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1); // Current page number
+  const [totalPages, setTotalPages] = useState(0); // Total number of pages
 
   // Use `useSearchParams` hook to access and update URL parameters
   const [searchParams, setSearchParams] = useSearchParams();
@@ -47,7 +47,7 @@ const MovieList = () => {
   }, 
   [searchQuery, selectedGenre, currentPage]); //dependency array - side effect (fetchMovies function) re-run whenever either the searchQuery or selectedGenre state variables change
 
-  // Use `useMemo` to optimize filtering logic
+  // Optimize filtering using useMemo
   const filteredMovies = useMemo(() => {
     return movies.filter((movie) =>
       ((movie.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -63,7 +63,7 @@ const MovieList = () => {
 
   return (
     <div className="movie-list">
-      {/* Render the `SearchBar` component */}
+      {/* Render the `SearchBar` component with state props*/}
       <SearchBar
         // left side "searchQuery" is theprop name that will be used within the SearchBar component to access the value of the searchQuery state variable
         // right side "searchQuery" is the value of the searchQuery state variable in the parent component. It represents the current search query entered by the user.
@@ -76,8 +76,9 @@ const MovieList = () => {
         <Suspense fallback={<div>Loading...</div>}>
           {/* Render the filtered list of movies using `MovieCard` components. It displays a list of movie cards that dynamically reflects the search and filtering criteria applied by the user. */}
           {filteredMovies.map((movie) => (
-            
-            <MovieCard key={movie.id} movie={movie} isFavorite={isFavorite(movie)} addToFavorites={addToFavorites} removeFromFavorites={removeFromFavorites}/>
+            <Link key={movie.id} to={`/movie/${movie.id}`}>
+              <MovieCard key={movie.id} movie={movie} isFavorite={isFavorite(movie)} addToFavorites={addToFavorites} removeFromFavorites={removeFromFavorites}/>
+            </Link>
             
           ))}
         </Suspense>

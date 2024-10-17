@@ -10,26 +10,30 @@ import MovieService from '../services/MovieService';  
 
 import '../styles/MovieDetails.css';
 
+// Defines a functional component named MovieDetails
 const MovieDetails = () => {
-  const { id } = useParams();
-  const [movie, setMovie] = useState(null);
+  const { id } = useParams(); // Extracts the movie ID from the URL parameters
+  const [movie, setMovie] = useState(null); // State variable to store the fetched movie data
 
+  // Fetches the movie details using the ID from URL parameters
   useEffect(() => {
     const fetchMovie = async () => {
       try {
-        const response = await
-        MovieService.getMovieById(id);
+        // Fetches movie data from MovieService
+        const response = await MovieService.getMovieById(id);
+        // Updates state with the fetched movie data
         setMovie(response.data);
       } catch (error) {
-        console.error(error);
+        console.error(error); // Handle errors
       }
     };
-
+    // Fetches movie data on component mount and whenever the ID changes
     fetchMovie();
   }, [id]);
 
   return (
     <div className="movie-details">
+      {/* Conditionally render movie details if movie data is available */}
       {movie && (
         <>
           <h2>{movie.title}</h2>
