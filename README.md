@@ -10,13 +10,15 @@ Node.js and npm (or yarn) installed on your system.:
 ## Installation
 
 ### 1. Clone this repository:
-'''Bash
+'''
+Bash
 git clone https://github.com/KelumPerera/movie-library.git
 
 '''
 
 ### 2. Navigate to the project directory:
-'''Bash
+'''
+Bash
 cd movie-library
 
 '''
@@ -28,7 +30,8 @@ npm install  # or yarn install
 ## Running the Application
 
 ### 1. Start the development server:
-'''Bash
+'''
+Bash
 npm start  # or yarn start
 '''
 
