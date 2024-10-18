@@ -1,0 +1,28 @@
+/* Styles the container for the search bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Styles the search input field */
+.search-bar input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  flex: 1; /* Allow the input to expand to fill available space */
+  margin-right: 10px;
+  outline: none; /* Remove default outline on focus */
+}
+/* Styles the genre selection dropdown */
+.search-bar select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: inherit; /* Inherit font size from parent element */
+}
+/* Styles the dropdown when it's focused */
+.search-bar select:focus {
+  outline: none; /* Remove default outline on focus */
+  border-color: #999; /* Change border color on focus */
+}

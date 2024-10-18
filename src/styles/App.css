@@ -1,0 +1,35 @@
+/* Styles the main application container */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Styles the navigation bar */
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+
+/* Styles navigation links */
+.navigation a {
+  text-decoration: none;
+  color: #333;
+  padding: 10px;
+  font-weight: bold;
+}
+
+/* Styles navigation links on hover */
+.navigation a:hover {
+  text-decoration: underline;
+}
+
+/* Styles the main content area */
+.main-content {
+  flex: 1;
+  padding: 20px;
+}

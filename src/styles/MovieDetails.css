@@ -1,0 +1,27 @@
+/* Styles the main container for the movie details page */
+.movie-details {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+/* Styles the movie poster image */
+.movie-details img {
+  width: 350px;
+  height: 450px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+/* Styles the movie title */
+.movie-details h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Styles the movie overview text */
+.movie-details p {
+  font-size: 16px;
+  line-height: 1.5; /* Adjust line spacing for readability */
+  
+}
